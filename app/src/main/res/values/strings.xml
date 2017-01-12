@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">NBTask</string>
+
+    <!--Temp Title-->
+    <string name="toolbar_title">Koramangala</string>
+
+
+    <!-- Volley Error Messages -->
+    <string name="generic_server_down">Could not connect. Please try later.</string>
+    <string name="no_internet">No internet connection.</string>
+    <string name="generic_error">Failed to connect to server.</string>
+
+    <!--Properties Adapter-->
+    <string name="properties_adapter_property_size"><b>%d Sq.Ft </b>\nBuilt up Area</string>
+    <string name="properties_adapter_bathroom">%1$s \n%2$d Bathroom</string>
+    <string name="properties_adapter_bathrooms">%1$s \n%2$d Bathrooms</string>
+    <string name="properties_adapter_rent">\u20B9%d</string>
+    <string name="properties_adapter_secondary_title">at %s</string>
+
+
+
+</resources>
