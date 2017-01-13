@@ -2,9 +2,12 @@ package ankit.com.nbtask.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatCheckBox;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -13,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import ankit.com.nbtask.NBTaskApplication;
+import ankit.com.nbtask.PropertiesListActivity;
 import ankit.com.nbtask.R;
 import ankit.com.nbtask.Utils.PrefConfig;
 import ankit.com.nbtask.model.Property;
@@ -44,6 +48,11 @@ public class PropertyFilterFragment extends Fragment {
     AppCompatCheckBox cbFurnishedSemi;
     @Bind(R.id.cbBhkFour)
     AppCompatCheckBox cbBhkFour;
+    PropertiesListActivity propertiesListActivity;
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
+    @Bind(R.id.appbar)
+    AppBarLayout appbar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -56,11 +65,12 @@ public class PropertyFilterFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        propertiesListActivity = (PropertiesListActivity) getActivity();
+        initToobar();
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Filter");
         initApartmentFilter();
         initPropertyType();
         initFurnishedType();
-
     }
 
     private void clearAllFilter() {
@@ -152,16 +162,32 @@ public class PropertyFilterFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_main, menu);
+        inflater.inflate(R.menu.filter_menu, menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            clearAllFilter();
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.menu_filter:
+                clearAllFilter();
+                break;
+            case android.R.id.home:
+                break;
         }
+        propertiesListActivity.closeFilterFragment();
         return super.onOptionsItemSelected(item);
 
+    }
+
+    private void initToobar() {
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        activity.setSupportActionBar(toolbar);
+        ActionBar actionBar = activity.getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_arrow_back_white_24px);
+            activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
     }
 
     @Override

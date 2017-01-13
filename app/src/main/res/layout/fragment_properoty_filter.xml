@@ -3,13 +3,16 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="?actionBarSize"
     android:background="@color/app_window_background_grey"
     android:orientation="vertical">
 
+    <include
+        layout="@layout/toolbar"/>
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="?actionBarSize">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -26,8 +29,8 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_marginTop="8dp"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp">
 
                 <android.support.v7.widget.AppCompatCheckBox
                     android:id="@+id/cbBhkTwo"
@@ -42,8 +45,8 @@
                     style="@style/Filter_Checkbox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@id/cbBhkTwo"
                     android:layout_marginLeft="8dp"
+                    android:layout_toRightOf="@id/cbBhkTwo"
                     android:gravity="center"
                     android:text="2 BHK"/>
 
@@ -52,24 +55,24 @@
                     style="@style/Filter_Checkbox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:layout_marginLeft="8dp"
                     android:layout_toRightOf="@id/cbBhkThree"
+                    android:gravity="center"
                     android:text="3 BHK"/>
             </RelativeLayout>
 
 
             <TextView
-                android:text="Propert Type"
-                android:layout_marginTop="@dimen/activity_vertical_margin"
-                android:layout_width="match_parent"
                 style="@style/Base.TextAppearance.AppCompat.Body2"
-                android:layout_height="wrap_content"/>
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:text="Propert Type"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_marginTop="8dp"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp">
 
                 <android.support.v7.widget.AppCompatCheckBox
                     android:id="@+id/cbPropertyAp"
@@ -93,8 +96,8 @@
                     android:id="@+id/cbPropertyIf"
                     style="@style/Filter_Checkbox"
                     android:layout_width="wrap_content"
-                    android:layout_below="@+id/cbPropertyAp"
                     android:layout_height="wrap_content"
+                    android:layout_below="@+id/cbPropertyAp"
                     android:layout_marginTop="8dp"
                     android:gravity="center"
                     android:text="Independent Floor/ Building floor"/>
@@ -102,16 +105,16 @@
 
 
             <TextView
-                android:text="Furnished"
-                android:layout_marginTop="@dimen/activity_vertical_margin"
-                android:layout_width="match_parent"
                 style="@style/Base.TextAppearance.AppCompat.Body2"
-                android:layout_height="wrap_content"/>
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:text="Furnished"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_marginTop="8dp"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp">
 
                 <android.support.v7.widget.AppCompatCheckBox
                     android:id="@+id/cbFurnishedfully"

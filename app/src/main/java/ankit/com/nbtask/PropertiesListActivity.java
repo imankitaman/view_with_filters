@@ -1,6 +1,5 @@
 package ankit.com.nbtask;
 
-import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
@@ -12,8 +11,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -27,11 +24,9 @@ import org.json.JSONObject;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-
 import ankit.com.nbtask.Utils.FilterUtility;
 import ankit.com.nbtask.Utils.MyLog;
 import ankit.com.nbtask.Utils.SpaceItemDecoration;
-import ankit.com.nbtask.Utils.Utility;
 import ankit.com.nbtask.adapter.PropertiesAdapter;
 import ankit.com.nbtask.fragment.PropertyFilterFragment;
 import ankit.com.nbtask.model.Property;
@@ -122,14 +117,9 @@ public class PropertiesListActivity extends AppCompatActivity {
         Fragment f = getSupportFragmentManager()
                 .findFragmentByTag(FILTER_FRAGMENT_TAG);
         if (f != null) {
-            getSupportActionBar().setTitle(R.string.app_name);
-            getSupportFragmentManager().popBackStack();
-            invalidateOptionsMenu();
-            fragmentContainer.setVisibility(View.GONE);
-            xfabActionButton.setVisibility(View.VISIBLE);
+           closeFilterFragment();
             filterProperties(originalPropertyList);
         } else {
-            getSupportActionBar().setTitle("Filters");
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.fragmentContainer, Fragment.instantiate(this, PropertyFilterFragment.class.getName()),
                             FILTER_FRAGMENT_TAG
@@ -197,37 +187,8 @@ public class PropertiesListActivity extends AppCompatActivity {
     private void initToolbar() {
         setSupportActionBar(toolbar);
         setTitle(getString(R.string.toolbar_title));
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setHomeAsUpIndicator(R.drawable.ic_arrow_back_white_24px);
-        }
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.menu_main, menu);
-//        return true;
-//    }
-//
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        if (item.getItemId() == android.R.id.home) {
-//            if (isFilterFragmentOpen()) {
-//                toggleFilterFragment();
-//                return true;
-//            }
-//            onBackPressed();
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
-//
-//    protected boolean isFilterFragmentOpen() {
-//        Fragment f = getSupportFragmentManager()
-//                .findFragmentByTag(FILTER_FRAGMENT_TAG);
-//        return f != null;
-//    }
 
     @OnClick(R.id.xfabActionButton)
     public void onClick() {
@@ -243,12 +204,16 @@ public class PropertiesListActivity extends AppCompatActivity {
             return;
         }
         finish();
+    }
 
-//        FragmentManager fm = getFragmentManager();
-//        if (fm.getBackStackEntryCount() > 1) {
-//            finish();
-//        } else {
-//            toggleFilterFragment();
-//        }
+    public void closeFilterFragment() {
+        android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
+        if (fm.getBackStackEntryCount() > 0) {
+            fm.popBackStack();
+            getSupportFragmentManager().popBackStack();
+            invalidateOptionsMenu();
+            fragmentContainer.setVisibility(View.GONE);
+            xfabActionButton.setVisibility(View.VISIBLE);
+        }
     }
 }
