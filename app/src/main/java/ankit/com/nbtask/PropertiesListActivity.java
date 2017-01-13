@@ -122,7 +122,7 @@ public class PropertiesListActivity extends AppCompatActivity {
             invalidateOptionsMenu();
             fragmentContainer.setVisibility(View.GONE);
             xfabActionButton.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             getSupportFragmentManager().beginTransaction()
                     .setCustomAnimations(R.anim.slide_up,
                             R.anim.slide_down,
