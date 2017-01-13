@@ -8,16 +8,16 @@ import android.widget.ImageView;
 
 import com.annimon.stream.function.BiConsumer;
 import com.bumptech.glide.Glide;
+
 import ankit.com.nbtask.BuildConfig;
 import ankit.com.nbtask.R;
 
 /**
  * Created by ankit
  */
-
 public class UiUtil {
 
-    public static void setRectangleImageUsingGlide(Context context, @NonNull ImageView imageView, @NonNull String imageUrl) {
+    public static void setRectangleImageUsingGlide(Context context, @NonNull ImageView imageView,@NonNull String imageUrl) {
         Glide.with(context)
                 .load(imageUrl)
                 .asBitmap()
