@@ -82,9 +82,9 @@ public class PropertyFilterFragment extends Fragment {
         NBTaskApplication.androidPreference.put(PrefConfig.BuildingType.IH.name(), "");
         NBTaskApplication.androidPreference.put(PrefConfig.Furnishing.FULLY_FURNISHED.name(), "");
         NBTaskApplication.androidPreference.put(PrefConfig.Furnishing.SEMI_FURNISHED.name(), "");
-        initApartmentFilter();
-        initPropertyType();
-        initFurnishedType();
+//        initApartmentFilter();
+//        initPropertyType();
+//        initFurnishedType();
     }
 
     private void initApartmentFilter() {
@@ -174,6 +174,7 @@ public class PropertyFilterFragment extends Fragment {
         switch (id) {
             case R.id.menu_filter:
                 clearAllFilter();
+                propertiesListActivity.filterProperties();
                 break;
             case android.R.id.home:
                 propertiesListActivity.toggleFilterFragment();
