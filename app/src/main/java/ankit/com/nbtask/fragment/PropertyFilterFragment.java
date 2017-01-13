@@ -75,6 +75,10 @@ public class PropertyFilterFragment extends Fragment {
         initFurnishedType();
     }
 
+    /**
+     * clear all the filter preferences value
+     *
+     */
     private void clearAllFilter() {
         NBTaskApplication.androidPreference.put(PrefConfig.ApartmentType.BHK2.name(), "");
         NBTaskApplication.androidPreference.put(PrefConfig.ApartmentType.BHK3.name(), "");
@@ -88,7 +92,6 @@ public class PropertyFilterFragment extends Fragment {
     }
 
     private void initApartmentFilter() {
-
         String apartmentBhkTwo = NBTaskApplication.androidPreference.getValue(PrefConfig.ApartmentType.BHK2.name(), "");
         String apartmentBhkThree = NBTaskApplication.androidPreference.getValue(PrefConfig.ApartmentType.BHK3.name(), "");
         String apartmentBhkFour = NBTaskApplication.androidPreference.getValue(PrefConfig.ApartmentType.BHK4.name(), "");
@@ -216,7 +219,6 @@ public class PropertyFilterFragment extends Fragment {
     public void onClick() {
         propertiesListActivity.filterProperties();
         propertiesListActivity.toggleFilterFragment();
-
     }
 
 }

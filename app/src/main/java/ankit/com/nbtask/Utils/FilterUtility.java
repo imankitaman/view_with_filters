@@ -33,6 +33,9 @@ public class FilterUtility {
         Predicate<Property> furnishingFilter = property -> Property.Furnishing.in(property.getFurnishing(), semiFurnished, fullyFurnished);
         Predicate<Property> buildingTypeFilter = property -> Property.BuildingType.in(property.getBuildingType(), propertyTypeAp, propertyTypeIf, propertyTypeIh);
 
+        /**
+         * Will check for all kind of Predicates and return the filtered list
+         */
         final List<Property> collect = Stream.of(originalCenters)
                 .filter(propertyFilter)
                 .filter(furnishingFilter)

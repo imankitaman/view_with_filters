@@ -112,6 +112,9 @@ public class PropertiesListActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * Will help in closing and opening filter Screen
+     */
     public void toggleFilterFragment() {
         Fragment f = getSupportFragmentManager()
                 .findFragmentByTag(FILTER_FRAGMENT_TAG);
@@ -138,6 +141,9 @@ public class PropertiesListActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * Will be called for filtering the {originalPropertyList}
+     */
     public void filterProperties() {
         //Updating Properties list using filter
         List<Property> desiredCenters = FilterUtility.getFilteredProperties(originalPropertyList);

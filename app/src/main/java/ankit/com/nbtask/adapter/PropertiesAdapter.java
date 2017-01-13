@@ -5,21 +5,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import com.annimon.stream.Collectors;
 import com.annimon.stream.Optional;
 import com.annimon.stream.Stream;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
 import ankit.com.nbtask.BuildConfig;
 import ankit.com.nbtask.R;
 import ankit.com.nbtask.Utils.Constants;
-import ankit.com.nbtask.Utils.MyLog;
 import ankit.com.nbtask.Utils.UiUtil;
 import ankit.com.nbtask.model.Photo;
 import ankit.com.nbtask.model.Property;
@@ -77,11 +69,9 @@ public class PropertiesAdapter extends RecyclerView.Adapter<PropertiesViewHolder
         holder.txtPropertySize.setText(mContext.getString(R.string.properties_adapter_property_size, property.getPropertySize()));
 
         int bathroomCount = property.getBathroom();// Count of bathrooms
-        List<Photo> photoList = property.getPhotosList();
-
+        List<Photo> photoList = property.getPhotosList();// List of photos in property
         final Optional<String> imageUrlOpt = Stream.of(photoList).filter(Photo::isDisplayPic).map(Photo::getImagesMap).map(Photo.ImagesMap::getMedium).findFirst();
         imageUrlOpt.ifPresent(url -> UiUtil.setRectangleImageUsingGlide(mContext, holder.imgProperty, String.format(BuildConfig.D3_URL, property.getId(), url)));
-
         final int bathroomType = bathroomCount == 1 ? R.string.properties_adapter_bathroom : R.string.properties_adapter_bathrooms;
         final String fTypeWithBathrooms = mContext.getString(bathroomType, getFurnishingType(property), bathroomCount);//for 1 Bathroom
         holder.txtFTypeWithBathrooms.setText(fTypeWithBathrooms);
