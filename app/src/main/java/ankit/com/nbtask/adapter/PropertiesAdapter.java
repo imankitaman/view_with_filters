@@ -70,7 +70,7 @@ public class PropertiesAdapter extends RecyclerView.Adapter<PropertiesViewHolder
 
         int bathroomCount = property.getBathroom();// Count of bathrooms
         List<Photo> photoList = property.getPhotosList();// List of photos in property
-        final Optional<String> imageUrlOpt = Stream.of(photoList).filter(Photo::isDisplayPic).map(Photo::getImagesMap).map(Photo.ImagesMap::getMedium).findFirst();
+        final Optional<String> imageUrlOpt = Stream.of(photoList).filter(p -> p.isDisplayPic()).map(pMap -> pMap.getImagesMap()).map(pImgMap -> pImgMap.getMedium()).findFirst();
         imageUrlOpt.ifPresent(url -> UiUtil.setRectangleImageUsingGlide(mContext, holder.imgProperty, String.format(BuildConfig.D3_URL, property.getId(), url)));
         final int bathroomType = bathroomCount == 1 ? R.string.properties_adapter_bathroom : R.string.properties_adapter_bathrooms;
         final String fTypeWithBathrooms = mContext.getString(bathroomType, getFurnishingType(property), bathroomCount);//for 1 Bathroom

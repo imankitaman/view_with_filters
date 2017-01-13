@@ -32,13 +32,24 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp">
 
+
                 <android.support.v7.widget.AppCompatCheckBox
-                    android:id="@+id/cbBhkTwo"
+                    android:id="@+id/cbBhkOne"
                     style="@style/Filter_Checkbox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="1 BHK"/>
+
+                <android.support.v7.widget.AppCompatCheckBox
+                    android:id="@+id/cbBhkTwo"
+                    style="@style/Filter_Checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_toRightOf="@id/cbBhkOne"
+                    android:gravity="center"
+                    android:text="2 BHK"/>
 
                 <android.support.v7.widget.AppCompatCheckBox
                     android:id="@+id/cbBhkThree"
@@ -48,7 +59,7 @@
                     android:layout_marginLeft="8dp"
                     android:layout_toRightOf="@id/cbBhkTwo"
                     android:gravity="center"
-                    android:text="2 BHK"/>
+                    android:text="3 BHK"/>
 
                 <android.support.v7.widget.AppCompatCheckBox
                     android:id="@+id/cbBhkFour"
@@ -58,7 +69,7 @@
                     android:layout_marginLeft="8dp"
                     android:layout_toRightOf="@id/cbBhkThree"
                     android:gravity="center"
-                    android:text="3 BHK"/>
+                    android:text="4 BHK"/>
             </RelativeLayout>
 
 

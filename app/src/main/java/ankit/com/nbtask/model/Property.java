@@ -30,20 +30,22 @@ public class Property implements Serializable {
     List<Photo> photosList;
     @SerializedName("bathroom")
     private int bathroom;
+
     @SerializedName("type")
     private ApartmentType apartmentType;
 
     public enum ApartmentType {
-        BHK3, BHK4, BHK2;
+        BHK1,BHK2,BHK3, BHK4;
 
         /**
-         * @param apartmentType check if presentnr in stream value
+         * @param apartmentType check if presenter in stream value
          * @param values
          * @return
          */
         public static boolean in(ApartmentType apartmentType, @NonNull String... values) {
-            final long emptyValues = Stream.of(values).filter(TextUtils::isEmpty).count();
-            if(emptyValues == values.length) return true; // none filters are selected, hence no filter to be applied
+            final long emptyValues = Stream.of(values).filter(value -> TextUtils.isEmpty(value)).count();
+            if (emptyValues == values.length)
+                return true; // none filters are selected, hence no filter to be applied
             if (apartmentType == null) {
                 MyLog.w("ApartmentType", "Passed Type is null");
                 return false;
@@ -61,8 +63,9 @@ public class Property implements Serializable {
 
         public static boolean in(BuildingType type, @NonNull String... values) {
 
-            final long emptyValues = Stream.of(values).filter(TextUtils::isEmpty).count();
-            if(emptyValues == values.length) return true; // none filters are selected, hence no filter to be applied
+            final long emptyValues = Stream.of(values).filter(value -> TextUtils.isEmpty(value)).count();
+            if (emptyValues == values.length)
+                return true; // none filters are selected, hence no filter to be applied
             if (type == null) {
                 MyLog.w("BuildingType", "Passed Type is null");
                 return false;
@@ -79,8 +82,9 @@ public class Property implements Serializable {
         FULLY_FURNISHED, SEMI_FURNISHED;
 
         public static boolean in(Furnishing type, @NonNull String... values) {
-            final long emptyValues = Stream.of(values).filter(TextUtils::isEmpty).count();
-            if(emptyValues == values.length) return true; // none filters are selected, hence no filter to be applied
+            final long emptyValues = Stream.of(values).filter(value -> TextUtils.isEmpty(value)).count();
+            if (emptyValues == values.length)
+                return true; // none filters are selected, hence no filter to be applied
             if (type == null) {
                 MyLog.w("Furnishing", "Passed Type is null");
                 return false;

@@ -27,6 +27,7 @@ public class FilterUtility {
         String propertyTypeIf = NBTaskApplication.androidPreference.getValue(PrefConfig.BuildingType.IF.name(), PrefConfig.emptyValue);
         String propertyTypeIh = NBTaskApplication.androidPreference.getValue(PrefConfig.BuildingType.IH.name(), PrefConfig.emptyValue);
 
+        String apartmentOne = NBTaskApplication.androidPreference.getValue(PrefConfig.ApartmentType.BHK1.name(), PrefConfig.emptyValue);
         String apartmentTwo = NBTaskApplication.androidPreference.getValue(PrefConfig.ApartmentType.BHK2.name(), PrefConfig.emptyValue);
         String apartmentThree = NBTaskApplication.androidPreference.getValue(PrefConfig.ApartmentType.BHK3.name(), PrefConfig.emptyValue);
         String apartmentFour = NBTaskApplication.androidPreference.getValue(PrefConfig.ApartmentType.BHK4.name(), PrefConfig.emptyValue);
@@ -37,7 +38,7 @@ public class FilterUtility {
         /**
          * stream filter properties type
          */
-        Predicate<Property> propertyFilter = property -> Property.ApartmentType.in(property.getApartmentType(), apartmentTwo, apartmentThree, apartmentFour);
+        Predicate<Property> propertyFilter = property -> Property.ApartmentType.in(property.getApartmentType(), apartmentOne, apartmentTwo, apartmentThree, apartmentFour);
 
         Predicate<Property> furnishingFilter = property -> Property.Furnishing.in(property.getFurnishing(), semiFurnished, fullyFurnished);
         Predicate<Property> buildingTypeFilter = property -> Property.BuildingType.in(property.getBuildingType(), propertyTypeAp, propertyTypeIf, propertyTypeIh);

@@ -15,6 +15,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import ankit.com.nbtask.NBTaskApplication;
 import ankit.com.nbtask.PropertiesListActivity;
@@ -55,6 +56,10 @@ public class PropertyFilterFragment extends Fragment {
     Toolbar toolbar;
     @Bind(R.id.appbar)
     AppBarLayout appbar;
+    @Bind(R.id.cbBhkOne)
+    AppCompatCheckBox cbBhkOne;
+    @Bind(R.id.btnApplyFilter)
+    Button btnApplyFilter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -77,41 +82,47 @@ public class PropertyFilterFragment extends Fragment {
 
     /**
      * clear all the filter preferences value
-     *
      */
     private void clearAllFilter() {
-        NBTaskApplication.androidPreference.put(PrefConfig.ApartmentType.BHK2.name(), "");
-        NBTaskApplication.androidPreference.put(PrefConfig.ApartmentType.BHK3.name(), "");
-        NBTaskApplication.androidPreference.put(PrefConfig.ApartmentType.BHK4.name(), "");
-        NBTaskApplication.androidPreference.put(PrefConfig.BuildingType.AP.name(), "");
-        NBTaskApplication.androidPreference.put(PrefConfig.BuildingType.IF.name(), "");
-        NBTaskApplication.androidPreference.put(PrefConfig.BuildingType.IH.name(), "");
-        NBTaskApplication.androidPreference.put(PrefConfig.Furnishing.FULLY_FURNISHED.name(), "");
-        NBTaskApplication.androidPreference.put(PrefConfig.Furnishing.SEMI_FURNISHED.name(), "");
+        NBTaskApplication.androidPreference.put(PrefConfig.ApartmentType.BHK1.name(), PrefConfig.emptyValue);
+        NBTaskApplication.androidPreference.put(PrefConfig.ApartmentType.BHK2.name(), PrefConfig.emptyValue);
+        NBTaskApplication.androidPreference.put(PrefConfig.ApartmentType.BHK3.name(), PrefConfig.emptyValue);
+        NBTaskApplication.androidPreference.put(PrefConfig.ApartmentType.BHK4.name(), PrefConfig.emptyValue);
+        NBTaskApplication.androidPreference.put(PrefConfig.BuildingType.AP.name(), PrefConfig.emptyValue);
+        NBTaskApplication.androidPreference.put(PrefConfig.BuildingType.IF.name(), PrefConfig.emptyValue);
+        NBTaskApplication.androidPreference.put(PrefConfig.BuildingType.IH.name(), PrefConfig.emptyValue);
+        NBTaskApplication.androidPreference.put(PrefConfig.Furnishing.FULLY_FURNISHED.name(), PrefConfig.emptyValue);
+        NBTaskApplication.androidPreference.put(PrefConfig.Furnishing.SEMI_FURNISHED.name(), PrefConfig.emptyValue);
         initPropertyType();
         initApartmentFilter();
         initFurnishedType();
-
     }
 
     private void initApartmentFilter() {
-        String apartmentBhkTwo = NBTaskApplication.androidPreference.getValue(PrefConfig.ApartmentType.BHK2.name(), "");
-        String apartmentBhkThree = NBTaskApplication.androidPreference.getValue(PrefConfig.ApartmentType.BHK3.name(), "");
-        String apartmentBhkFour = NBTaskApplication.androidPreference.getValue(PrefConfig.ApartmentType.BHK4.name(), "");
+        String apartmentBhkOne = NBTaskApplication.androidPreference.getValue(PrefConfig.ApartmentType.BHK1.name(), PrefConfig.emptyValue);
+        String apartmentBhkTwo = NBTaskApplication.androidPreference.getValue(PrefConfig.ApartmentType.BHK2.name(), PrefConfig.emptyValue);
+        String apartmentBhkThree = NBTaskApplication.androidPreference.getValue(PrefConfig.ApartmentType.BHK3.name(), PrefConfig.emptyValue);
+        String apartmentBhkFour = NBTaskApplication.androidPreference.getValue(PrefConfig.ApartmentType.BHK4.name(), PrefConfig.emptyValue);
 
+        cbBhkTwo.setChecked(false);
         cbBhkTwo.setChecked(false);
         cbBhkThree.setChecked(false);
         cbBhkFour.setChecked(false);
 
+        setChecked.accept(cbBhkOne, apartmentBhkOne);
         setChecked.accept(cbBhkTwo, apartmentBhkTwo);
         setChecked.accept(cbBhkThree, apartmentBhkThree);
         setChecked.accept(cbBhkFour, apartmentBhkFour);
+
+        cbBhkOne.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            String filteredValue = isChecked ? Property.ApartmentType.BHK1.name() : "";
+            NBTaskApplication.androidPreference.put(PrefConfig.ApartmentType.BHK1.name(), filteredValue);
+        });
 
         cbBhkTwo.setOnCheckedChangeListener((buttonView, isChecked) -> {
             String filteredValue = isChecked ? Property.ApartmentType.BHK2.name() : "";
             NBTaskApplication.androidPreference.put(PrefConfig.ApartmentType.BHK2.name(), filteredValue);
         });
-
 
         cbBhkThree.setOnCheckedChangeListener((buttonView, isChecked) -> {
             String filteredValue = isChecked ? Property.ApartmentType.BHK3.name() : "";
@@ -122,7 +133,6 @@ public class PropertyFilterFragment extends Fragment {
         cbBhkFour.setOnCheckedChangeListener((buttonView, isChecked) -> {
             String filteredValue = isChecked ? Property.ApartmentType.BHK4.name() : "";
             NBTaskApplication.androidPreference.put(PrefConfig.ApartmentType.BHK4.name(), filteredValue);
-
         });
     }
 
@@ -142,7 +152,7 @@ public class PropertyFilterFragment extends Fragment {
 
 
         cbPropertyAp.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            String filterProperty = isChecked ? Property.BuildingType.AP.name() : "";
+            String filterProperty = isChecked ? Property.BuildingType.AP.name() : PrefConfig.emptyValue;
             NBTaskApplication.androidPreference.put(PrefConfig.BuildingType.AP.name(), filterProperty);
         });
 
