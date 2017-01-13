@@ -5,7 +5,6 @@ import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -24,6 +23,7 @@ import org.json.JSONObject;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+
 import ankit.com.nbtask.Utils.FilterUtility;
 import ankit.com.nbtask.Utils.MyLog;
 import ankit.com.nbtask.Utils.SpaceItemDecoration;
@@ -97,9 +97,8 @@ public class PropertiesListActivity extends AppCompatActivity {
                     originalPropertyList.addAll(properties);
                     final List<Property> filteredProperties = FilterUtility.getFilteredProperties(properties);
                     int demoSIze = 0;
-                    MyLog.showToast(PropertiesListActivity.this, "Total Count =+" + (demoSIze + properties.size()));
                     offset += count;
-//                    txtvwErrorMsg.setVisibility(View.GONE);
+                    txtError.setVisibility(View.GONE);
                     rvProperties.setVisibility(View.VISIBLE);
                     propertiesAdapter.addProperties(filteredProperties);
                     rvProperties.addOnScrollListener(mRecyclerViewOnScrollListener);
@@ -117,24 +116,31 @@ public class PropertiesListActivity extends AppCompatActivity {
         Fragment f = getSupportFragmentManager()
                 .findFragmentByTag(FILTER_FRAGMENT_TAG);
         if (f != null) {
-           closeFilterFragment();
-            filterProperties(originalPropertyList);
-        } else {
+            invalidateOptionsMenu();
+            getSupportFragmentManager().beginTransaction().remove(f).commit();
+            getSupportFragmentManager().popBackStack();
+            invalidateOptionsMenu();
+            fragmentContainer.setVisibility(View.GONE);
+            xfabActionButton.setVisibility(View.VISIBLE);
+        }else{
             getSupportFragmentManager().beginTransaction()
+                    .setCustomAnimations(R.anim.slide_up,
+                            R.anim.slide_down,
+                            R.anim.slide_up,
+                            R.anim.slide_down)
                     .add(R.id.fragmentContainer, Fragment.instantiate(this, PropertyFilterFragment.class.getName()),
                             FILTER_FRAGMENT_TAG
                     ).addToBackStack(null).commit();
             fragmentContainer.setVisibility(View.VISIBLE);
             xfabActionButton.setVisibility(View.GONE);
+            invalidateOptionsMenu();
         }
     }
 
 
-    public void filterProperties(final List<Property> properties) {
-        if (properties == null)
-            return;
-        //Updating Center list using filter
-        List<Property> desiredCenters = FilterUtility.getFilteredProperties(properties);
+    public void filterProperties() {
+        //Updating Properties list using filter
+        List<Property> desiredCenters = FilterUtility.getFilteredProperties(originalPropertyList);
         if (desiredCenters.isEmpty()) {
             onError("We could not find results for applied filters");
         } else {
@@ -206,14 +212,4 @@ public class PropertiesListActivity extends AppCompatActivity {
         finish();
     }
 
-    public void closeFilterFragment() {
-        android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
-        if (fm.getBackStackEntryCount() > 0) {
-            fm.popBackStack();
-            getSupportFragmentManager().popBackStack();
-            invalidateOptionsMenu();
-            fragmentContainer.setVisibility(View.GONE);
-            xfabActionButton.setVisibility(View.VISIBLE);
-        }
-    }
 }

@@ -175,7 +175,7 @@ public class PropertyFilterFragment extends Fragment {
             case android.R.id.home:
                 break;
         }
-        propertiesListActivity.closeFilterFragment();
+        propertiesListActivity.toggleFilterFragment();
         return super.onOptionsItemSelected(item);
 
     }
@@ -198,8 +198,10 @@ public class PropertyFilterFragment extends Fragment {
 
     @OnClick(R.id.btnApplyFilter)
     public void onClick() {
-        getActivity().onBackPressed();
+        propertiesListActivity.filterProperties();
+        propertiesListActivity.toggleFilterFragment();
 
     }
+
 }
 
