@@ -1,5 +1,6 @@
 package ankit.com.nbtask.fragment;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
@@ -19,6 +20,7 @@ import ankit.com.nbtask.NBTaskApplication;
 import ankit.com.nbtask.PropertiesListActivity;
 import ankit.com.nbtask.R;
 import ankit.com.nbtask.Utils.PrefConfig;
+import ankit.com.nbtask.Utils.Utility;
 import ankit.com.nbtask.model.Property;
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -171,8 +173,19 @@ public class PropertyFilterFragment extends Fragment {
         int id = item.getItemId();
         switch (id) {
             case R.id.menu_filter:
-                clearAllFilter();
-                propertiesListActivity.filterProperties();
+                Utility.showAlertDialog(getActivity(), "", "Are you sure, you want to clear all filters ?", (dialog, which) -> {
+                    switch (which) {
+                        case DialogInterface.BUTTON_POSITIVE:
+                            clearAllFilter();
+                            propertiesListActivity.filterProperties();
+                            propertiesListActivity.toggleFilterFragment();
+                            dialog.dismiss();
+                        case DialogInterface.BUTTON_NEGATIVE:
+                            dialog.dismiss();
+                    }
+
+                });
+
                 break;
             case android.R.id.home:
                 propertiesListActivity.toggleFilterFragment();

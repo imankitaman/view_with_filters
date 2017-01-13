@@ -60,35 +60,11 @@ public final class ServerRequestController {
                 REQUEST_RETRY_LIMIT,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         // Adding request to request queue
-
         responseHandler.setCurrentRequest(jsonObjReq);
 
         VolleyRequestQueue.instance().addToRequestQueue(jsonObjReq, tag);
     }
 
-    /**
-     * Makes a server api request with http-method : DELETE
-     * @param url Server API url
-     * @param responseHandler A callback which handles both Success and Failure of the API request
-     * @param tag  identifier for the request queue maintained by Volley
-     */
-    public static void post(@NonNull String url, @NonNull JSONObject params, ServerResponseHandler responseHandler, @NonNull String tag, boolean... showDialog)  {
-        Context currentActivity = responseHandler.getContext();
-        if(!NetworkManager.nManager.checkAndShowNetworkAlert(currentActivity)){
-            return ;
-        }
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST ,url, params, responseHandler, responseHandler) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> headers = new HashMap<String, String>();
-                headers.put("Content-ApartmentType", "application/json");
-//                headers.put("token", TownCakesApplication.androidPreference.getValue(PreferenceConfig.USER_TOKEN,""));
-                return headers;
-            }
-        };
-        responseHandler.setCurrentRequest(jsonObjReq);
-        VolleyRequestQueue.instance().addToRequestQueue(jsonObjReq, tag);
-    }
 
 
     /**

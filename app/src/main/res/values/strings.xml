@@ -3,6 +3,7 @@
 
     <!--Temp Title-->
     <string name="toolbar_title">Koramangala</string>
+    <string name="dialog_title">No Broker</string>
 
 
     <!-- Volley Error Messages -->

@@ -7,7 +7,6 @@ import android.content.DialogInterface;
 import android.os.Build;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
-import java.util.HashMap;
 import java.util.Map;
 
 import ankit.com.nbtask.R;
@@ -20,63 +19,13 @@ public class Utility {
 
     private static Map<String, String> map;
 
-    public enum DateFormat {DATABASE_DATE, USER_READABLE, USER_READABLE_WITH_TIME, CALDROID_SELECTED}
 
     /**
      * The progress dialog.
      */
     public static ProgressDialog progressDialog;
 
-    public static Map<String, String> getMap() {
-        if (map == null) {
-            map = new HashMap<String, String>();
-        } else {
-            map.clear();
-        }
-        return map;
-    }
 
-    public static long getCurrentEpochTime() {
-        long currentEpochTIme = System.currentTimeMillis();
-        return currentEpochTIme / 1000;
-    }
-
-
-    /**
-     * Function to display simple Alert Dialog.
-     *
-     * @param context - application context
-     * @param title   - alert dialog title
-     * @param message - alert message
-     * @author ankitaman
-     */
-    public static void showAlertDialog(Context context, String title, String message) {
-        if (context != null && context instanceof Activity) {
-            AlertDialog alertDialog;
-            alertDialog = new AlertDialog.Builder(context, R.style.Theme_AppCompat_Light_Dialog_Alert).create();
-
-            title = TextUtils.isEmpty(title) ? "" : title;
-
-            // Setting Dialog Title
-            alertDialog.setTitle(title);
-
-            // Setting Dialog Message
-            alertDialog.setMessage(message);
-
-            // Setting alert dialog icon
-            // alertDialog.setIcon((status) ? R.drawable.success :
-            // R.drawable.fail);
-
-            // Setting OK Button
-            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-                }
-            });
-
-            // Showing Alert Message
-            alertDialog.show();
-        }
-    }
 
     public static AlertDialog showAlertDialog(Context context, String title, String message, DialogInterface.OnClickListener listener) {
         if (context != null && context instanceof Activity && !((Activity) context).isFinishing()) {
@@ -126,7 +75,7 @@ public class Utility {
     public static void showProgressDialog(Context context, String title, String message, boolean... isCancelable) {
         hideProgressDialog();
         if (context != null && context instanceof Activity) {
-            title = TextUtils.isEmpty(title) ? context.getResources().getString(R.string.app_name) : title;
+            title = TextUtils.isEmpty(title) ? context.getResources().getString(R.string.dialog_title) : title;
             message = TextUtils.isEmpty(message) ? "Loading. Please wait.." : message;
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
                 progressDialog = new ProgressDialog(context);

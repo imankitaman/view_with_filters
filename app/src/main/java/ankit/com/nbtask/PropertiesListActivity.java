@@ -149,6 +149,9 @@ public class PropertiesListActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * @param errMsg will remove recycler view and show the error message
+     */
     private void onError(String errMsg) {
         if (!TextUtils.isEmpty(errMsg)) {
             rvProperties.setVisibility(View.GONE);
@@ -160,6 +163,9 @@ public class PropertiesListActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * {@link android.support.v7.widget.RecyclerView.OnScrollListener} with help to find the itemCount for pagination.
+     */
     public RecyclerView.OnScrollListener
             mRecyclerViewOnScrollListener = new RecyclerView.OnScrollListener() {
         @Override
@@ -180,6 +186,10 @@ public class PropertiesListActivity extends AppCompatActivity {
         }
     };
 
+    /**
+     * initializing recycler view with all its properties
+     * margin difference of 4 dp {@link SpaceItemDecoration} class will handle.
+     */
     private void initPropertiesVwAdapter() {
         propertiesAdapter = new PropertiesAdapter();
         mLayoutManager = new LinearLayoutManager(this);
@@ -192,13 +202,13 @@ public class PropertiesListActivity extends AppCompatActivity {
 
     private void initToolbar() {
         setSupportActionBar(toolbar);
-        setTitle(getString(R.string.toolbar_title));
+        setTitle(getString(R.string.toolbar_title));// with dummy toolbar text
     }
 
 
     @OnClick(R.id.xfabActionButton)
     public void onClick() {
-        toggleFilterFragment();
+        toggleFilterFragment();// open filter fragment
     }
 
     @Override
@@ -212,4 +222,11 @@ public class PropertiesListActivity extends AppCompatActivity {
         finish();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ButterKnife.unbind(this);
+        //Will cancel the api request
+        ServerRequestController.cancelApiCallsByTag(TAG);
+    }
 }
