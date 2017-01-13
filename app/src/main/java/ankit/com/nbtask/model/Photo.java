@@ -7,7 +7,7 @@ public class Photo {
 
     private String title;
     private boolean displayPic;
-    private imagesMap imagesMap;
+    private ImagesMap imagesMap;
 
     public String getTitle() {
         return title;
@@ -17,11 +17,11 @@ public class Photo {
         return displayPic;
     }
 
-    public Photo.imagesMap getImagesMap() {
+    public ImagesMap getImagesMap() {
         return imagesMap;
     }
 
-    public class imagesMap{
+    public class ImagesMap {
         String thumbnail;
         String original;
         String large;

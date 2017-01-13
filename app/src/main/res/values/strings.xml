@@ -14,7 +14,7 @@
     <string name="properties_adapter_property_size"><b>%d Sq.Ft </b>\nBuilt up Area</string>
     <string name="properties_adapter_bathroom">%1$s \n%2$d Bathroom</string>
     <string name="properties_adapter_bathrooms">%1$s \n%2$d Bathrooms</string>
-    <string name="properties_adapter_rent">\u20B9%d</string>
+    <string name="properties_adapter_rent">\u20B9 %d</string>
     <string name="properties_adapter_secondary_title">at %s</string>
 
 

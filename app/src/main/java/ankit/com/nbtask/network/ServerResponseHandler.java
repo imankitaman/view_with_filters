@@ -104,23 +104,20 @@ public abstract class ServerResponseHandler implements Response.Listener<JSONObj
             // hide the progress dialog
 
 
-            AlertDialog alertDialog = Utility.showAlertDialog(context, "", VolleyErrorHelper.getMessage(volleyError, context), new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    // System.exit(0);
-                    switch (which) {
-                        case DialogInterface.BUTTON_POSITIVE:
-                            count++;
+            AlertDialog alertDialog = Utility.showAlertDialog(context, "", VolleyErrorHelper.getMessage(volleyError, context), (dialog, which) -> {
+                // System.exit(0);
+                switch (which) {
+                    case DialogInterface.BUTTON_POSITIVE:
+                        count++;
 
-                            break;
-                        case DialogInterface.BUTTON_NEGATIVE:
-                            break;
-                    }
+                        break;
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        break;
                 }
             });
             if (alertDialog != null) {
                 if (count < 4) {
-                    alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setText("Retry");
+                    alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setText("Ok");
                 } else {
                     alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setText("Exit");
                 }

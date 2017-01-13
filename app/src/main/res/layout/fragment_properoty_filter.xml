@@ -3,6 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="?actionBarSize"
+    android:background="@color/app_window_background_grey"
     android:orientation="vertical">
 
     <ScrollView
@@ -28,7 +30,7 @@
                 android:layout_height="wrap_content">
 
                 <android.support.v7.widget.AppCompatCheckBox
-                    android:id="@+id/cbBhkOne"
+                    android:id="@+id/cbBhkTwo"
                     style="@style/Filter_Checkbox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -36,23 +38,23 @@
                     android:text="1 BHK"/>
 
                 <android.support.v7.widget.AppCompatCheckBox
-                    android:id="@+id/cbBhkTwo"
+                    android:id="@+id/cbBhkThree"
                     style="@style/Filter_Checkbox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@id/cbBhkOne"
+                    android:layout_toRightOf="@id/cbBhkTwo"
                     android:layout_marginLeft="8dp"
                     android:gravity="center"
                     android:text="2 BHK"/>
 
                 <android.support.v7.widget.AppCompatCheckBox
-                    android:id="@+id/cbBhkThree"
+                    android:id="@+id/cbBhkFour"
                     style="@style/Filter_Checkbox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:layout_marginLeft="8dp"
-                    android:layout_toRightOf="@id/cbBhkTwo"
+                    android:layout_toRightOf="@id/cbBhkThree"
                     android:text="3 BHK"/>
             </RelativeLayout>
 
@@ -70,7 +72,7 @@
                 android:layout_height="wrap_content">
 
                 <android.support.v7.widget.AppCompatCheckBox
-                    android:id="@+id/cbAp"
+                    android:id="@+id/cbPropertyAp"
                     style="@style/Filter_Checkbox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -78,20 +80,20 @@
                     android:text="Apartment"/>
 
                 <android.support.v7.widget.AppCompatCheckBox
-                    android:id="@+id/cbIh"
+                    android:id="@+id/cbPropertyIh"
                     style="@style/Filter_Checkbox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
-                    android:layout_toRightOf="@+id/cbAp"
+                    android:layout_toRightOf="@+id/cbPropertyAp"
                     android:gravity="center"
                     android:text="Independent House/Villa"/>
 
                 <android.support.v7.widget.AppCompatCheckBox
-                    android:id="@+id/cbIf"
+                    android:id="@+id/cbPropertyIf"
                     style="@style/Filter_Checkbox"
                     android:layout_width="wrap_content"
-                    android:layout_below="@+id/cbAp"
+                    android:layout_below="@+id/cbPropertyAp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:gravity="center"
@@ -112,7 +114,7 @@
                 android:layout_height="wrap_content">
 
                 <android.support.v7.widget.AppCompatCheckBox
-                    android:id="@+id/cbfully"
+                    android:id="@+id/cbFurnishedfully"
                     style="@style/Filter_Checkbox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -120,12 +122,12 @@
                     android:text="Fully "/>
 
                 <android.support.v7.widget.AppCompatCheckBox
-                    android:id="@+id/cbSemi"
+                    android:id="@+id/cbFurnishedSemi"
                     style="@style/Filter_Checkbox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
-                    android:layout_toRightOf="@+id/cbfully"
+                    android:layout_toRightOf="@+id/cbFurnishedfully"
                     android:gravity="center"
                     android:text="Semi"/>
 
@@ -135,6 +137,7 @@
     </ScrollView>
 
     <Button
+        android:id="@+id/btnApplyFilter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

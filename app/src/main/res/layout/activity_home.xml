@@ -15,10 +15,46 @@
         android:id="@+id/rvProperties"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="gone"
         android:clipToPadding="false"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     </android.support.v7.widget.RecyclerView>
+
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/txtError"
+            android:padding="@dimen/activity_horizontal_margin"
+            android:layout_gravity="center"
+            android:gravity="center"
+            style="@style/Base.TextAppearance.AppCompat.Body2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:id="@+id/fragmentContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@color/cardview_dark_background"
+            android:tag="property_list_fragment"
+            android:visibility="gone"/>
+
+        <View
+            android:id="@+id/animationView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:background="@color/app_window_background_grey"
+            />
+
+    </FrameLayout>
+
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/xfabActionButton"
@@ -27,8 +63,8 @@
         android:layout_margin="16dp"
         app:backgroundTint="@color/colorPrimaryDark"
         app:borderWidth="0dp"
-        app:layout_anchorGravity="bottom|end"
         app:layout_anchor="@id/rvProperties"
-        app:srcCompat="@drawable/ic_filter_list_white_24px"
-        app:rippleColor="@color/colorPrimary"/>
+        app:layout_anchorGravity="bottom|end"
+        app:rippleColor="@color/colorPrimary"
+        app:srcCompat="@drawable/ic_filter_list_white_24px"/>
 </android.support.design.widget.CoordinatorLayout>

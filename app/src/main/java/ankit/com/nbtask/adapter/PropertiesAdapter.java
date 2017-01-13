@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.annimon.stream.Collectors;
+import com.annimon.stream.Optional;
 import com.annimon.stream.Stream;
 
 import java.util.ArrayList;
@@ -76,20 +77,13 @@ public class PropertiesAdapter extends RecyclerView.Adapter<PropertiesViewHolder
         holder.txtPropertySize.setText(mContext.getString(R.string.properties_adapter_property_size, property.getPropertySize()));
 
         int bathroomCount = property.getBathroom();// Count of bathrooms
-        //TODO fetch displayPic
         List<Photo> photoList = property.getPhotosList();
 
-        final Map<String, Photo> imageMap = Stream.of(photoList).filter(p -> p.isDisplayPic()).collect(Collectors.toMap(photo -> photo.getImagesMap().getMedium()));
-        MyLog.e("key of map ", imageMap.keySet().toString());
-        if (property.isPhotoAvailable()) {
-            String imageUrl = String.format(BuildConfig.D3_URL, property.getId(), photoList.get(0).getImagesMap().getMedium());
-            UiUtil.setRectangleImageUsingGlide(mContext, holder.imgProperty, imageUrl);
-        }
-        final String fTypeWithBathrooms;
-        if (bathroomCount == 1) {
-            fTypeWithBathrooms = mContext.getString(R.string.properties_adapter_bathroom, getFurnishingType(property), bathroomCount);//for 1 Bathroom
-        } else
-            fTypeWithBathrooms = mContext.getString(R.string.properties_adapter_bathrooms, getFurnishingType(property), bathroomCount);//for more than 1 Bathrooms
+        final Optional<String> imageUrlOpt = Stream.of(photoList).filter(Photo::isDisplayPic).map(Photo::getImagesMap).map(Photo.ImagesMap::getMedium).findFirst();
+        imageUrlOpt.ifPresent( url -> UiUtil.setRectangleImageUsingGlide(mContext, holder.imgProperty, url));
+
+        final int bathroomType = bathroomCount == 1 ? R.string.properties_adapter_bathroom : R.string.properties_adapter_bathrooms;
+        final String fTypeWithBathrooms= mContext.getString(bathroomType, getFurnishingType(property), bathroomCount);//for 1 Bathroom
         holder.txtFTypeWithBathrooms.setText(fTypeWithBathrooms);
     }
 
@@ -98,14 +92,14 @@ public class PropertiesAdapter extends RecyclerView.Adapter<PropertiesViewHolder
      * @return String value of enum
      */
     private String getFurnishingType(Property property) {
-        if (property.getFurnishing() == null) return Constants.FurnishedType.NOT_FURNISHED;
+        if (property.getFurnishing() == null) return Constants.FurnishedType.NOT_FURNISHED.value;
         switch (property.getFurnishing()) {
             case FULLY_FURNISHED:
-                return Constants.FurnishedType.FULLY_FURNISHED;
+                return Constants.FurnishedType.FULLY_FURNISHED.value;
             case SEMI_FURNISHED:
-                return Constants.FurnishedType.SEMI_FURNISHED;
+                return Constants.FurnishedType.SEMI_FURNISHED.value;
             default:
-                return Constants.FurnishedType.NOT_FURNISHED;
+                return Constants.FurnishedType.NOT_FURNISHED.value;
         }
     }
 

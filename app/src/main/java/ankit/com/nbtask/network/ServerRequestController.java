@@ -50,7 +50,7 @@ public final class ServerRequestController {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<String, String>();
-//                headers.put("Content-Type", "application/json");
+//                headers.put("Content-ApartmentType", "application/json");
                 return headers;
             }
         };
@@ -81,7 +81,7 @@ public final class ServerRequestController {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<String, String>();
-                headers.put("Content-Type", "application/json");
+                headers.put("Content-ApartmentType", "application/json");
 //                headers.put("token", TownCakesApplication.androidPreference.getValue(PreferenceConfig.USER_TOKEN,""));
                 return headers;
             }

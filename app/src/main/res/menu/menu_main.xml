@@ -2,19 +2,4 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item
-        android:id="@+id/menu_add"
-        app:actionLayout="@layout/layout_switch"
-        android:title=""
-        android:orderInCategory="1"
-        app:showAsAction="always"
-        />
-
-    <item
-        android:id="@+id/menu_search"
-        android:icon="@drawable/ic_search_white_24px"
-        android:title="Search"
-        android:orderInCategory="2"
-        app:showAsAction="always"/>
-
 </menu>

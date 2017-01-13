@@ -6,9 +6,16 @@ package ankit.com.nbtask.Utils;
 
 public class Constants {
 
-    public interface FurnishedType{
-         String FULLY_FURNISHED = "Fully Furnished";
-         String SEMI_FURNISHED = "Semi Furnished";
-         String NOT_FURNISHED = "Not Furnished";
+    public enum FurnishedType {
+        FULLY_FURNISHED("Fully Furnished"),
+        SEMI_FURNISHED("Semi Furnished"),
+        NOT_FURNISHED("Not Furnished");
+        public String value;
+
+        FurnishedType(String value) {
+            this.value = value;
+        }
     }
+
+    public enum IntentString {PROPERTIES_LIST}
 }
