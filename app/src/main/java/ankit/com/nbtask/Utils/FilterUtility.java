@@ -36,11 +36,16 @@ public class FilterUtility {
         String fullyFurnished = NBTaskApplication.androidPreference.getValue(PrefConfig.Furnishing.FULLY_FURNISHED.name(), PrefConfig.emptyValue);
 
         /**
-         * stream filter properties type
+         * stream filter  for properties type
          */
         Predicate<Property> propertyFilter = property -> Property.ApartmentType.in(property.getApartmentType(), apartmentOne, apartmentTwo, apartmentThree, apartmentFour);
-
+        /**
+         * stream filter  for furnished type
+         */
         Predicate<Property> furnishingFilter = property -> Property.Furnishing.in(property.getFurnishing(), semiFurnished, fullyFurnished);
+        /**
+         * stream filter  for building type
+         */
         Predicate<Property> buildingTypeFilter = property -> Property.BuildingType.in(property.getBuildingType(), propertyTypeAp, propertyTypeIf, propertyTypeIh);
 
         /**
@@ -52,7 +57,7 @@ public class FilterUtility {
                 .filter(buildingTypeFilter)
                 .collect(Collectors.toList());
 
-        MyLog.i("filtered list ", collect.toString());
+        MyLog.i("filtered list ", String.valueOf(collect.size()));
         return collect;
     }
 }

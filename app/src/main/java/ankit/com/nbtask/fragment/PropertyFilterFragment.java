@@ -205,7 +205,6 @@ public class PropertyFilterFragment extends Fragment {
                         case DialogInterface.BUTTON_POSITIVE:
                             clearAllFilter();
                             propertiesListActivity.filterProperties();
-                            propertiesListActivity.toggleFilterFragment();
                             dialog.dismiss();
                         case DialogInterface.BUTTON_NEGATIVE:
                             dialog.dismiss();

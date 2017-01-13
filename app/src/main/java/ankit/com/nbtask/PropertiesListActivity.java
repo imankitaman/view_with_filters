@@ -97,8 +97,7 @@ public class PropertiesListActivity extends AppCompatActivity {
                     originalPropertyList.addAll(properties);
                     final List<Property> filteredProperties = FilterUtility.getFilteredProperties(properties);
                     offset += count;
-                    txtError.setVisibility(View.GONE);
-                    rvProperties.setVisibility(View.VISIBLE);
+                    onError(null);
                     propertiesAdapter.addProperties(filteredProperties);
                     rvProperties.addOnScrollListener(mRecyclerViewOnScrollListener);
                 }
@@ -147,6 +146,7 @@ public class PropertiesListActivity extends AppCompatActivity {
         if (desiredCenters.isEmpty()) {
             onError("We could not find results for applied filters");
         } else {
+            onError(null);
             propertiesAdapter.clearAllProperties();
             propertiesAdapter.addProperties(desiredCenters);
         }
