@@ -88,6 +88,9 @@ public class PropertyFilterFragment extends Fragment {
         NBTaskApplication.androidPreference.put(PrefConfig.BuildingType.IH.name(), "");
         NBTaskApplication.androidPreference.put(PrefConfig.Furnishing.FULLY_FURNISHED.name(), "");
         NBTaskApplication.androidPreference.put(PrefConfig.Furnishing.SEMI_FURNISHED.name(), "");
+        initPropertyType();
+        initApartmentFilter();
+        initFurnishedType();
 
     }
 
@@ -95,6 +98,10 @@ public class PropertyFilterFragment extends Fragment {
         String apartmentBhkTwo = NBTaskApplication.androidPreference.getValue(PrefConfig.ApartmentType.BHK2.name(), "");
         String apartmentBhkThree = NBTaskApplication.androidPreference.getValue(PrefConfig.ApartmentType.BHK3.name(), "");
         String apartmentBhkFour = NBTaskApplication.androidPreference.getValue(PrefConfig.ApartmentType.BHK4.name(), "");
+
+        cbBhkTwo.setChecked(false);
+        cbBhkThree.setChecked(false);
+        cbBhkFour.setChecked(false);
 
         setChecked.accept(cbBhkTwo, apartmentBhkTwo);
         setChecked.accept(cbBhkThree, apartmentBhkThree);
@@ -125,6 +132,10 @@ public class PropertyFilterFragment extends Fragment {
         String propertyTypeIf = NBTaskApplication.androidPreference.getValue(PrefConfig.BuildingType.IF.name(), "");
         String propertyTypeIh = NBTaskApplication.androidPreference.getValue(PrefConfig.BuildingType.IH.name(), "");
 
+        cbPropertyAp.setChecked(false);
+        cbPropertyIf.setChecked(false);
+        cbPropertyIh.setChecked(false);
+
         setChecked.accept(cbPropertyAp, propertyTypeAp);
         setChecked.accept(cbPropertyIf, propertyTypeIf);
         setChecked.accept(cbPropertyIh, propertyTypeIh);
@@ -151,6 +162,9 @@ public class PropertyFilterFragment extends Fragment {
 
         String furnishedTypeFully = NBTaskApplication.androidPreference.getValue(PrefConfig.Furnishing.FULLY_FURNISHED.name(), "");
         String furnishedTypeSemi = NBTaskApplication.androidPreference.getValue(PrefConfig.Furnishing.SEMI_FURNISHED.name(), "");
+
+        cbFurnishedfully.setChecked(false);
+        cbFurnishedSemi.setChecked(false);
 
         setChecked.accept(cbFurnishedfully, furnishedTypeFully);
         setChecked.accept(cbFurnishedSemi, furnishedTypeSemi);

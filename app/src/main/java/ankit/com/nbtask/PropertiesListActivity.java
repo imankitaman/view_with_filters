@@ -96,7 +96,6 @@ public class PropertiesListActivity extends AppCompatActivity {
                 } else {
                     originalPropertyList.addAll(properties);
                     final List<Property> filteredProperties = FilterUtility.getFilteredProperties(properties);
-                    int demoSIze = 0;
                     offset += count;
                     txtError.setVisibility(View.GONE);
                     rvProperties.setVisibility(View.VISIBLE);
@@ -122,7 +121,6 @@ public class PropertiesListActivity extends AppCompatActivity {
             invalidateOptionsMenu();
             getSupportFragmentManager().beginTransaction().remove(f).commit();
             getSupportFragmentManager().popBackStack();
-            invalidateOptionsMenu();
             fragmentContainer.setVisibility(View.GONE);
             xfabActionButton.setVisibility(View.VISIBLE);
         } else {
@@ -136,7 +134,6 @@ public class PropertiesListActivity extends AppCompatActivity {
                     ).addToBackStack(null).commit();
             fragmentContainer.setVisibility(View.VISIBLE);
             xfabActionButton.setVisibility(View.GONE);
-            invalidateOptionsMenu();
         }
     }
 
@@ -162,7 +159,7 @@ public class PropertiesListActivity extends AppCompatActivity {
         if (!TextUtils.isEmpty(errMsg)) {
             rvProperties.setVisibility(View.GONE);
             txtError.setVisibility(View.VISIBLE);
-            txtError.setError(errMsg);
+            txtError.setText(errMsg);
         } else {
             rvProperties.setVisibility(View.VISIBLE);
             txtError.setVisibility(View.GONE);
