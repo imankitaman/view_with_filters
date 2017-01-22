@@ -1,6 +1,9 @@
 package ankit.com.nbtask;
 
+
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -10,7 +13,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -27,6 +32,7 @@ import java.util.List;
 import ankit.com.nbtask.Utils.FilterUtility;
 import ankit.com.nbtask.Utils.MyLog;
 import ankit.com.nbtask.Utils.SpaceItemDecoration;
+import ankit.com.nbtask.Utils.UiUtil;
 import ankit.com.nbtask.adapter.PropertiesAdapter;
 import ankit.com.nbtask.fragment.PropertyFilterFragment;
 import ankit.com.nbtask.model.Property;
@@ -52,11 +58,10 @@ public class PropertiesListActivity extends AppCompatActivity {
     @Bind(R.id.xfabActionButton)
     FloatingActionButton xfabActionButton;
     @Bind(R.id.activity_home)
-    CoordinatorLayout activityHome;
+    FrameLayout activityHome;
     @Bind(R.id.fragmentContainer)
     LinearLayout fragmentContainer;
-    @Bind(R.id.animationView)
-    View animationView;
+
     @Bind(R.id.txtError)
     TextView txtError;
 
@@ -79,6 +84,7 @@ public class PropertiesListActivity extends AppCompatActivity {
         initToolbar();
 
     }
+
 
     private void getPropertiesList(int pageNo) {
         final String apiUrl = ServerAPIRoutes.getApiUrl(ServerAPIRoutes.GET_PROPERTIES_LIST, pageNo);
@@ -113,7 +119,7 @@ public class PropertiesListActivity extends AppCompatActivity {
     /**
      * Will help in closing and opening filter Screen
      */
-    public void toggleFilterFragment() {
+    public void toggleFilterFragment(boolean... isSlideAnim) {
         Fragment f = getSupportFragmentManager()
                 .findFragmentByTag(FILTER_FRAGMENT_TAG);
         if (f != null) {
@@ -123,14 +129,22 @@ public class PropertiesListActivity extends AppCompatActivity {
             fragmentContainer.setVisibility(View.GONE);
             xfabActionButton.setVisibility(View.VISIBLE);
         } else {
-            getSupportFragmentManager().beginTransaction()
-                    .setCustomAnimations(R.anim.slide_up,
-                            R.anim.slide_down,
-                            R.anim.slide_up,
-                            R.anim.slide_down)
-                    .add(R.id.fragmentContainer, Fragment.instantiate(this, PropertyFilterFragment.class.getName()),
-                            FILTER_FRAGMENT_TAG
-                    ).addToBackStack(null).commit();
+            if (isSlideAnim.length > 0 && isSlideAnim[0]) {
+                getSupportFragmentManager().beginTransaction()
+                        .setCustomAnimations(R.anim.slide_up,
+                                R.anim.slide_down,
+                                R.anim.slide_up,
+                                R.anim.slide_down)
+                        .add(R.id.fragmentContainer, Fragment.instantiate(this, PropertyFilterFragment.class.getName()),
+                                FILTER_FRAGMENT_TAG
+                        ).addToBackStack(null).commit();
+
+            } else {
+                getSupportFragmentManager().beginTransaction()
+                        .add(R.id.fragmentContainer, Fragment.instantiate(this, PropertyFilterFragment.class.getName()),
+                                FILTER_FRAGMENT_TAG
+                        ).addToBackStack(null).commit();
+            }
             fragmentContainer.setVisibility(View.VISIBLE);
             xfabActionButton.setVisibility(View.GONE);
         }
@@ -208,10 +222,18 @@ public class PropertiesListActivity extends AppCompatActivity {
         setTitle(getString(R.string.toolbar_title));// with dummy toolbar text
     }
 
+    private void handleanimation() {
+        UiUtil.animateRevealColorFromCoordinates(this, activityHome, R.color.anim_background);
+        Handler handler = new Handler();
+        handler.postDelayed(this::toggleFilterFragment, 300);
+    }
 
     @OnClick(R.id.xfabActionButton)
     public void onClick() {
-        toggleFilterFragment();// open filter fragment
+        if (Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP)
+            handleanimation();
+        else
+            toggleFilterFragment(true);// open filter fragment
     }
 
     @Override

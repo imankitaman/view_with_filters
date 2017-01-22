@@ -22,4 +22,6 @@
     <color name="icons">#FFFFFF</color>
     <color name="divider">#BDBDBD</color>
 
+    <color name="anim_background">@color/divider</color>
+
 </resources>

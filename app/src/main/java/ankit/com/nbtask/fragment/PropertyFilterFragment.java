@@ -15,6 +15,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 import android.widget.Button;
 
 import ankit.com.nbtask.NBTaskApplication;
@@ -78,7 +79,9 @@ public class PropertyFilterFragment extends Fragment {
         initApartmentFilter();
         initPropertyType();
         initFurnishedType();
+
     }
+
 
     /**
      * clear all the filter preferences value
